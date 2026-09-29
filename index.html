@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzy - MOT Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="container">
+
+        <!-- Start Screen -->
+        <section id="startScreen" class="card start-screen">
+            <div class="logo">🧠 Quizzy</div>
+
+            <h1>MOT Quiz</h1>
+
+            <p class="subtitle">
+                Molecular Orbital Theory
+            </p>
+
+            <div class="info">
+                <div>📚 36 Questions</div>
+                <div>⭐ 1 Mark Each</div>
+                <div>⏱️ 2:30 Per Question</div>
+            </div>
+
+            <p class="instruction">
+                Select one answer and submit it before the timer ends.
+                If time runs out, the question receives 0 marks automatically.
+            </p>
+
+            <button id="startBtn" class="primary-btn">
+                Start Quiz
+            </button>
+        </section>
+
+
+        <!-- Quiz Screen -->
+        <section id="quizScreen" class="card hidden">
+
+            <div class="quiz-header">
+                <div class="logo small">🧠 Quizzy</div>
+
+                <div id="timer" class="timer">
+                    2:30
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+
+            <div id="questionNumber" class="question-number">
+                Question 1 of 36
+            </div>
+
+            <h2 id="question">
+                Question goes here
+            </h2>
+
+            <form id="quizForm">
+
+                <div id="options"></div>
+
+                <button
+                    id="submitBtn"
+                    type="submit"
+                    class="primary-btn submit-btn"
+                    disabled>
+                    Submit Answer
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- Result Screen -->
+        <section id="resultScreen" class="card start-screen hidden">
+
+            <div class="logo">🎉 Quiz Complete</div>
+
+            <h1 id="score">
+                0 / 36
+            </h1>
+
+            <p class="subtitle">
+                Your final score
+            </p>
+
+            <p>
+                The correct answers are not displayed.
+            </p>
+
+            <button id="restartBtn" class="primary-btn">
+                Restart Quiz
+            </button>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
