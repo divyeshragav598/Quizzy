@@ -348,6 +348,10 @@ let currentQuestion = 0;
 let score = 0;
 let timeLeft = 150;
 let timerInterval;
+let studentName = "";
+
+const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbziBnRQnKK7Pp86TIE85lUb_I1dbQTVvl0-_IvolzUQDaptUMtKk8gOCfpyXUzUCvOp8w/exec";
 
 
 /* Elements */
@@ -530,6 +534,15 @@ quizForm.addEventListener("submit", function(event) {
 
 startBtn.addEventListener("click", function() {
 
+    const name = prompt("Enter your name:");
+
+    if (!name || name.trim() === "") {
+        alert("Please enter your name to start the quiz.");
+        return;
+    }
+
+    studentName = name.trim();
+
     currentQuestion = 0;
     score = 0;
 
@@ -542,8 +555,6 @@ startBtn.addEventListener("click", function() {
     showQuestion();
 
 });
-
-
 /* Result */
 
 function showResult() {
@@ -559,8 +570,33 @@ function showResult() {
     scoreText.textContent =
         `${score} / ${questions.length}`;
 
-}
+    // Send result to Google Sheets
+    const now = new Date();
 
+    const resultData = {
+        name: studentName,
+        score: score,
+        total: questions.length,
+        date: now.toLocaleDateString(),
+        time: now.toLocaleTimeString()
+    };
+
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(resultData)
+    })
+    .then(() => {
+        console.log("Result sent to Google Sheets");
+    })
+    .catch((error) => {
+        console.error("Could not send result:", error);
+    });
+
+}
 
 /* Restart */
 
