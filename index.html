@@ -133,7 +133,8 @@ const SHEET_URL = "";         // optional: Google Apps Script web-app URL to log
 
 /* ============ APP ============ */
 const $ = id => document.getElementById(id);
-const KEY = "quizzy_mot_state";
+// Saved attempts are tied to this exact question set, so old test data from a different version is ignored
+const KEY = "quizzy_mot_" + QUESTIONS.length + "_" + [...JSON.stringify(QUESTIONS)].reduce((a, c) => (a * 31 + c.charCodeAt(0)) | 0, 7);
 let S = null, tick = null;
 
 const load = () => { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } };
@@ -199,7 +200,7 @@ function advance(kind) {
   S.i++; S.deadline = 0; save(); render();
 }
 $("sub").onclick = () => advance("submit");
-$("skp").onclick = () => advance("skip");
+$("skp").onclick = () => { if (confirm("Skip this question? It scores 0 and you cannot come back to it.")) advance("skip"); };
 
 function finish(first) {
   clearInterval(tick);
