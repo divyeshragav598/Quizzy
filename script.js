@@ -349,6 +349,8 @@ let score = 0;
 let timeLeft = 150;
 let timerInterval;
 let studentName = "";
+let studentName = "";
+let registrationNumber = "";
 
 const GOOGLE_SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbziBnRQnKK7Pp86TIE85lUb_I1dbQTVvl0-_IvolzUQDaptUMtKk8gOCfpyXUzUCvOp8w/exec";
